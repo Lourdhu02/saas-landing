@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { Header, Footer } from "@/components/layout";
-import { BlogGrid, FadeIn } from "@/components/sections";
+import { BlogGrid } from "@/components/sections";
+import { FadeIn } from "@/components/motion";
 import { Button } from "@/components/ui";
 import { blogPosts } from "@/data/site";
 

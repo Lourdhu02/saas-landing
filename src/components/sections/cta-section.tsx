@@ -1,39 +1,42 @@
+"use client";
+
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui";
 import { FadeIn } from "@/components/motion";
 
 export function CTASection() {
   return (
-    <section className="py-24">
+    <section className="section-padding">
       <div className="container-page">
         <FadeIn>
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-600 via-brand-500 to-brand-700 px-8 py-16 text-center md:px-16 md:py-24">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(255,255,255,0.1)_0%,_transparent_60%)]" />
-            <div className="relative z-10">
-              <h2 className="text-3xl font-bold text-white md:text-5xl">
-                Ready to Transform Your Business?
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-brand-600 to-accent-600 px-8 py-20 text-center md:px-20 md:py-28">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.15)_0%,_transparent_50%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_rgba(255,255,255,0.1)_0%,_transparent_50%)]" />
+            <div className="relative z-10 space-y-6">
+              <h2 className="text-3xl font-bold text-white md:text-5xl font-display text-balance">
+                Ready to Transform Your AI Infrastructure?
               </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-brand-100">
-                Join hundreds of companies using our AI platform to drive
-                innovation and growth.
+              <p className="mx-auto max-w-2xl text-white/80 text-lg">
+                Join 500+ enterprises that trust Aethra to power their AI workloads. 
+                Get started with a free trial today.
               </p>
-              <div className="mt-8 flex flex-wrap justify-center gap-4">
+              <div className="flex flex-wrap justify-center gap-4 pt-4">
                 <Button
                   href="/pricing"
                   variant="secondary"
                   size="lg"
-                  className="bg-white text-brand-600 hover:bg-brand-50"
+                  className="bg-white text-brand-600 hover:bg-brand-50 border-0"
+                  rightIcon={<ArrowRight size={18} />}
                 >
-                  Get Started Today
-                  <ArrowRight size={18} />
+                  Get Started
                 </Button>
                 <Button
                   href="/contact"
-                  variant="outline"
+                  variant="ghost"
                   size="lg"
-                  className="border-white/30 text-white hover:bg-white/10"
+                  className="border-2 border-white/40 text-white hover:bg-white/10"
                 >
-                  Talk to Sales
+                  Contact Sales
                 </Button>
               </div>
             </div>

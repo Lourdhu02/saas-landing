@@ -4,7 +4,14 @@ import Lenis from "lenis";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export function initSmoothScroll(): Lenis {
+function resolveElement(el: string | Element | null): Element | null {
+  if (!el) return null;
+  return typeof el === "string" ? document.querySelector(el) : el;
+}
+
+export function initSmoothScroll(): Lenis | null {
+  if (typeof window === "undefined") return null;
+
   const lenis = new Lenis({
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -22,33 +29,44 @@ export function initSmoothScroll(): Lenis {
   return lenis;
 }
 
-export function animateInView(
+export function fadeInUp(
   element: string | Element,
-  animation: gsap.TweenVars
-): ScrollTrigger {
+  delay: number = 0,
+  duration: number = 0.7
+): ScrollTrigger | null {
+  const el = resolveElement(element);
+  if (!el) return null;
+
+  gsap.set(el, { opacity: 0, y: 40 });
+
   return ScrollTrigger.create({
-    trigger: element,
+    trigger: el,
     start: "top 85%",
-    onEnter: () => gsap.to(element, { ...animation, paused: false }),
+    onEnter: () => {
+      gsap.to(el, {
+        opacity: 1,
+        y: 0,
+        duration,
+        delay,
+        ease: "power3.out",
+      });
+    },
   });
 }
 
-export function staggerChildren(
+export function staggerElements(
   container: string | Element,
-  children: string,
+  items: string,
   stagger: number = 0.1
 ): void {
-  const parent =
-    typeof container === "string"
-      ? document.querySelector(container)
-      : container;
+  const parent = resolveElement(container);
   if (!parent) return;
 
-  const els = Array.from(parent.querySelectorAll(children));
-  if (!els.length) return;
+  const children = Array.from(parent.querySelectorAll(items));
+  if (!children.length) return;
 
   gsap.fromTo(
-    els,
+    children,
     { opacity: 0, y: 30 },
     {
       opacity: 1,
@@ -65,32 +83,34 @@ export function staggerChildren(
 
 export function countUp(
   element: string | Element,
-  target: number
+  target: number,
+  suffix: string = "",
+  duration: number = 2
 ): void {
-  const el = typeof element === "string" ? document.querySelector(element) : element;
+  const el = resolveElement(element);
   if (!el) return;
 
-  gsap.fromTo(
-    el,
-    { textContent: 0 },
-    {
-      textContent: target,
-      duration: 2,
-      ease: "power2.out",
-      snap: { textContent: 1 },
-      scrollTrigger: {
-        trigger: el,
-        start: "top 85%",
-      },
-    }
-  );
+  const obj = { value: 0 };
+
+  gsap.to(obj, {
+    value: target,
+    duration,
+    ease: "power2.out",
+    onUpdate: () => {
+      el.textContent = Math.floor(obj.value).toLocaleString() + suffix;
+    },
+    scrollTrigger: {
+      trigger: el,
+      start: "top 85%",
+    },
+  });
 }
 
 export function marqueeAnimation(
   element: string | Element,
   direction: "left" | "right" = "left"
 ): void {
-  const el = typeof element === "string" ? document.querySelector(element) : element;
+  const el = resolveElement(element);
   if (!el) return;
 
   gsap.to(el, {
@@ -101,46 +121,72 @@ export function marqueeAnimation(
   });
 }
 
-export function typeWrite(
+export function parallaxElement(
   element: string | Element,
-  text: string
+  speed: number = 0.5
 ): void {
-  const el = typeof element === "string" ? document.querySelector(element) : element;
+  const el = resolveElement(element);
   if (!el) return;
 
-  el.textContent = "";
-
   gsap.to(el, {
-    duration: text.length * 0.05,
+    y: () => (1 - speed) * 100,
     ease: "none",
-    onUpdate: function () {
-      const progress = this.progress();
-      const chars = Math.floor(progress * text.length);
-      el.textContent = text.slice(0, chars);
+    scrollTrigger: {
+      trigger: el,
+      start: "top bottom",
+      end: "bottom top",
+      scrub: true,
     },
   });
 }
 
-export function fadeInUp(
-  element: string | Element,
-  delay: number = 0
-): void {
-  const el = typeof element === "string" ? document.querySelector(element) : element;
+export function textReveal(element: string | Element): void {
+  const el = resolveElement(element);
   if (!el) return;
 
-  gsap.fromTo(
-    el,
-    { opacity: 0, y: 40 },
-    {
-      opacity: 1,
-      y: 0,
-      duration: 0.7,
-      delay,
-      ease: "power3.out",
-      scrollTrigger: {
+  const text = el.textContent || "";
+  el.textContent = "";
+
+  const chars = text.split("").map((char) => {
+    const span = document.createElement("span");
+    span.textContent = char === " " ? "\u00A0" : char;
+    span.style.display = "inline-block";
+    span.style.opacity = "0";
+    el.appendChild(span);
+    return span;
+  });
+
+  gsap.to(chars, {
+    opacity: 1,
+    y: 0,
+    stagger: 0.02,
+    duration: 0.4,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: el,
+      start: "top 85%",
+    },
+  });
+}
+
+export function animateOnScroll(
+  elements: string | Element | (string | Element)[],
+  animation: gsap.TweenVars = { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }
+): ScrollTrigger[] {
+  const items = Array.isArray(elements) ? elements : [elements];
+
+  return items
+    .map((item) => {
+      const el = resolveElement(item);
+      if (!el) return null;
+
+      gsap.set(el, { opacity: 0, y: 30 });
+
+      return ScrollTrigger.create({
         trigger: el,
         start: "top 85%",
-      },
-    }
-  );
+        onEnter: () => gsap.to(el, { ...animation }),
+      });
+    })
+    .filter((t): t is ScrollTrigger => t !== null);
 }

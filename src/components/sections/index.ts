@@ -8,5 +8,5 @@ export { CTASection } from "./cta-section";
 export { BlogGrid } from "./blog-grid";
 export { TeamSection } from "./team-section";
 export { ContactForm } from "./contact-form";
-
-export { FadeIn, CountUp, StaggerContainer, StaggerItem } from "@/components/motion";
+export { StatsSection } from "./stats-section";
+export { ProcessSection } from "./process-section";

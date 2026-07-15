@@ -10,14 +10,16 @@ gsap.registerPlugin(ScrollTrigger);
 interface CountUpProps {
   target: number;
   suffix?: string;
+  prefix?: string;
   duration?: number;
-  label: string;
+  label?: string;
   className?: string;
 }
 
 export function CountUp({
   target,
   suffix = "",
+  prefix = "",
   duration = 2,
   label,
   className,
@@ -57,12 +59,13 @@ export function CountUp({
     <div className={cn("text-center", className)}>
       <span
         ref={ref}
-        className="block text-4xl font-bold text-brand-400 md:text-5xl"
+        className="block text-4xl font-bold text-brand-600 md:text-5xl"
       >
-        {formatted}
-        {suffix}
+        {prefix}{formatted}{suffix}
       </span>
-      <span className="mt-1 block text-sm text-surface-400">{label}</span>
+      {label && (
+        <span className="mt-1 block text-sm text-surface-500">{label}</span>
+      )}
     </div>
   );
 }

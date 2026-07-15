@@ -31,10 +31,10 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 glass shadow-lg shadow-surface-950/50">
+      <header className="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur-xl shadow-sm border-b border-surface-200/50">
         <div className="container-page flex h-16 items-center">
           <Link href="/" className="text-xl font-bold">
-            <span className="gradient-text">AI SaaS</span>
+            <span className="gradient-text">Aethra</span>
           </Link>
         </div>
       </header>
@@ -44,18 +44,18 @@ export default async function BlogPostPage({ params }: PageProps) {
           <div className="container-page max-w-3xl">
             <Link
               href="/blog"
-              className="mb-8 inline-flex items-center gap-2 text-sm text-surface-400 transition-colors hover:text-surface-50"
+              className="mb-8 inline-flex items-center gap-2 text-sm text-surface-500 transition-colors hover:text-surface-900"
             >
               <ArrowLeft size={16} />
               Back to Blog
             </Link>
 
             <div className="mb-8 space-y-4">
-              <Badge variant="brand">{post.category}</Badge>
+              <Badge variant="default">{post.category}</Badge>
               <h1 className="text-3xl font-bold leading-tight md:text-5xl">
                 {post.title}
               </h1>
-              <div className="flex flex-wrap items-center gap-4 text-sm text-surface-400">
+              <div className="flex flex-wrap items-center gap-4 text-sm text-surface-500">
                 <span className="flex items-center gap-1">
                   <User size={16} />
                   {post.author}
@@ -68,15 +68,15 @@ export default async function BlogPostPage({ params }: PageProps) {
               </div>
             </div>
 
-            <div className="aspect-video rounded-2xl bg-gradient-to-br from-surface-700 to-surface-800 mb-12" />
+            <div className="aspect-video rounded-2xl bg-gradient-to-br from-brand-100 to-brand-200 mb-12" />
 
-            <div className="prose prose-invert max-w-none space-y-6 text-surface-300">
+            <div className="max-w-none space-y-6 text-surface-600">
               <p>
                 This is where the full blog post content would appear. In a
                 production build, this would be rendered from MDX or a CMS.
                 Below are some placeholder sections to demonstrate the layout.
               </p>
-              <h2 className="text-2xl font-semibold text-surface-50">
+              <h2 className="text-2xl font-semibold text-surface-900">
                 Section Heading
               </h2>
               <p>
@@ -92,12 +92,12 @@ export default async function BlogPostPage({ params }: PageProps) {
               </p>
             </div>
 
-            <div className="mt-12 flex flex-wrap items-center gap-3 border-y border-surface-800 py-6">
-              <Tag size={16} className="text-surface-400" />
+            <div className="mt-12 flex flex-wrap items-center gap-3 border-y border-surface-200 py-6">
+              <Tag size={16} className="text-surface-500" />
               {post.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-full border border-surface-700 bg-surface-800/50 px-3 py-1 text-xs text-surface-300"
+                  className="rounded-full border border-surface-200 bg-surface-50 px-3 py-1 text-xs text-surface-600"
                 >
                   {tag}
                 </span>
@@ -107,9 +107,9 @@ export default async function BlogPostPage({ params }: PageProps) {
         </article>
 
         {relatedPosts.length > 0 && (
-          <section className="border-t border-surface-800 py-24">
+          <section className="border-t border-surface-200 py-24">
             <div className="container-page">
-              <h2 className="mb-12 text-2xl font-bold text-surface-50">
+              <h2 className="mb-12 text-2xl font-bold text-surface-900">
                 Related Posts
               </h2>
               <div className="grid gap-8 md:grid-cols-3">
@@ -119,14 +119,14 @@ export default async function BlogPostPage({ params }: PageProps) {
                     href={`/blog/${rp.slug}`}
                     className="group"
                   >
-                    <div className="aspect-video rounded-xl bg-gradient-to-br from-surface-700 to-surface-800 mb-4" />
-                    <Badge variant="brand" className="mb-2">
+                    <div className="aspect-video rounded-xl bg-gradient-to-br from-brand-100 to-brand-200 mb-4" />
+                    <Badge variant="default" className="mb-2">
                       {rp.category}
                     </Badge>
-                    <h3 className="text-lg font-semibold text-surface-50 transition-colors group-hover:text-brand-400">
+                    <h3 className="text-lg font-semibold text-surface-900 transition-colors group-hover:text-brand-600">
                       {rp.title}
                     </h3>
-                    <p className="mt-1 text-sm text-surface-400">
+                    <p className="mt-1 text-sm text-surface-500">
                       {rp.excerpt}
                     </p>
                   </Link>
@@ -137,9 +137,9 @@ export default async function BlogPostPage({ params }: PageProps) {
         )}
       </main>
 
-      <footer className="border-t border-surface-800 py-8">
+      <footer className="border-t border-surface-200 bg-surface-50 py-8">
         <div className="container-page text-center text-sm text-surface-500">
-          &copy; {new Date().getFullYear()} AI SaaS. All rights reserved.
+          &copy; {new Date().getFullYear()} Aethra. All rights reserved.
         </div>
       </footer>
     </>

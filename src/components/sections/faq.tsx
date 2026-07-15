@@ -11,10 +11,10 @@ export function FAQ() {
   const [openId, setOpenId] = useState<string | null>(null);
 
   return (
-    <section className="py-24">
+    <section className="section-padding" id="faq">
       <div className="container-page max-w-3xl">
         <FadeIn className="mb-12 text-center">
-          <h2 className="text-3xl font-bold md:text-4xl">
+          <h2 className="text-3xl font-bold md:text-4xl font-display text-surface-900">
             <span className="gradient-text">Frequently Asked Questions</span>
           </h2>
         </FadeIn>
@@ -25,13 +25,18 @@ export function FAQ() {
             return (
               <div
                 key={faq.id}
-                className="overflow-hidden rounded-xl border border-surface-700/50 transition-colors hover:border-surface-600"
+                className={cn(
+                  "overflow-hidden rounded-xl border transition-all duration-200",
+                  isOpen
+                    ? "border-brand-200 bg-white shadow-sm"
+                    : "border-surface-200 bg-white/50 hover:border-surface-300"
+                )}
               >
                 <button
                   onClick={() => setOpenId(isOpen ? null : faq.id)}
-                  className="flex w-full items-center justify-between px-6 py-5 text-left"
+                  className="flex w-full items-center justify-between px-6 py-5 text-left gap-4"
                 >
-                  <span className="text-sm font-medium text-surface-50">
+                  <span className="text-sm font-medium text-surface-900">
                     {faq.question}
                   </span>
                   <ChevronDown
@@ -51,8 +56,8 @@ export function FAQ() {
                       transition={{ duration: 0.2, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <div className="border-t border-surface-700/50 px-6 py-4">
-                        <p className="text-sm leading-relaxed text-surface-400">
+                      <div className="border-t border-surface-100 px-6 py-4">
+                        <p className="text-sm leading-relaxed text-surface-600">
                           {faq.answer}
                         </p>
                       </div>

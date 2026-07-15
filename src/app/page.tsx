@@ -1,12 +1,16 @@
 import { Header, Footer } from "@/components/layout";
 import {
   Hero,
-  HeroStats,
   ServicesGrid,
   Testimonials,
   PricingTable,
+  FAQ,
   CTASection,
   BlogGrid,
+  TeamSection,
+  ContactForm,
+  StatsSection,
+  ProcessSection,
 } from "@/components/sections";
 
 export default function HomePage() {
@@ -15,12 +19,16 @@ export default function HomePage() {
       <Header />
       <main>
         <Hero />
-        <HeroStats />
         <ServicesGrid />
-        <Testimonials />
+        <ProcessSection />
+        <StatsSection />
         <PricingTable />
-        <CTASection />
+        <Testimonials />
         <BlogGrid />
+        <TeamSection />
+        <CTASection />
+        <FAQ />
+        <ContactForm />
       </main>
       <Footer />
     </>

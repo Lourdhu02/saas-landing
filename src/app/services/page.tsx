@@ -5,10 +5,8 @@ import {
   ServicesGrid,
   FAQ,
   CTASection,
-  FadeIn,
-  StaggerContainer,
-  StaggerItem,
 } from "@/components/sections";
+import { FadeIn, StaggerContainer, StaggerItem } from "@/components/motion";
 import { services } from "@/data/site";
 
 const processSteps = [

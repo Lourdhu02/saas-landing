@@ -2,7 +2,8 @@
 
 import { Mail, MapPin, Phone, Github, Twitter, Linkedin } from "lucide-react";
 import { Header, Footer } from "@/components/layout";
-import { ContactForm, FAQ, FadeIn } from "@/components/sections";
+import { ContactForm, FAQ } from "@/components/sections";
+import { FadeIn } from "@/components/motion";
 import { siteConfig } from "@/data/site";
 
 export default function ContactPage() {

@@ -5,9 +5,8 @@ import {
   TeamSection,
   CTASection,
   HeroStats,
-  FadeIn,
-  CountUp,
 } from "@/components/sections";
+import { FadeIn, CountUp } from "@/components/motion";
 
 const companyStats = [
   { label: "Years in Business", value: 8, suffix: "+" },

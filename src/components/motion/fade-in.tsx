@@ -1,6 +1,6 @@
 "use client";
 
-import { type ElementType, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { motion, type Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -12,7 +12,8 @@ interface FadeInProps {
   delay?: number;
   duration?: number;
   className?: string;
-  as?: ElementType;
+  once?: boolean;
+  amount?: number;
 }
 
 const directionVariants: Record<Direction, { x?: number; y?: number }> = {
@@ -28,7 +29,8 @@ export function FadeIn({
   delay = 0,
   duration = 0.5,
   className,
-  as: Tag = "div",
+  once = true,
+  amount = 0.2,
 }: FadeInProps) {
   const offset = directionVariants[direction];
 
@@ -46,7 +48,7 @@ export function FadeIn({
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={{ once, margin: "-100px", amount }}
       variants={variants}
       className={cn(className)}
     >

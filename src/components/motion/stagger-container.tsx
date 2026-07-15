@@ -15,15 +15,6 @@ interface StaggerItemProps {
   className?: string;
 }
 
-const containerVariants: Variants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
@@ -38,7 +29,7 @@ export function StaggerContainer({
   className,
   staggerDelay = 0.1,
 }: StaggerContainerProps) {
-  const customContainerVariants: Variants = {
+  const containerVariants: Variants = {
     hidden: {},
     visible: {
       transition: {
@@ -51,8 +42,8 @@ export function StaggerContainer({
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
-      variants={customContainerVariants}
+      viewport={{ once: true, margin: "-100px" }}
+      variants={containerVariants}
       className={cn(className)}
     >
       {children}

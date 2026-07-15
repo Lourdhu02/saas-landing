@@ -1,47 +1,73 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui";
+import { Twitter, Linkedin } from "lucide-react";
+import { Card } from "@/components/ui";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/motion";
 import { teamMembers } from "@/data/site";
+import type { TeamMember } from "@/types";
+import { generateInitials } from "@/lib/utils";
 
 export function TeamSection() {
   return (
-    <section className="py-24">
+    <section className="section-padding" id="team">
       <div className="container-page">
         <FadeIn className="mb-16 text-center">
-          <h2 className="text-3xl font-bold md:text-4xl">
-            <span className="gradient-text">Our Team</span>
+          <h2 className="text-3xl font-bold md:text-4xl font-display text-surface-900">
+            Meet the Team Behind <span className="gradient-text">Aethra</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-surface-400">
-            Meet the brilliant minds behind our AI platform.
+          <p className="mx-auto mt-4 max-w-2xl text-surface-500">
+            World-class engineers, researchers, and product leaders building the future of enterprise AI.
           </p>
         </FadeIn>
 
         <StaggerContainer className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {teamMembers.map((member) => (
+          {teamMembers.map((member: TeamMember) => (
             <StaggerItem key={member.id}>
-              <Card className="group h-full overflow-hidden">
+              <Card className="group h-full overflow-hidden text-center" padding="none">
                 <div className="relative">
-                  <div className="flex aspect-square items-center justify-center bg-gradient-to-br from-brand-500/20 to-brand-700/20">
-                    <span className="text-5xl font-bold text-brand-400/50">
-                      {member.name
-                        .split(" ")
-                        .map((n) => n[0])
-                        .join("")}
+                  <div className="flex aspect-square items-center justify-center bg-gradient-to-br from-brand-100 to-brand-200">
+                    <span className="text-5xl font-bold text-brand-500/60 font-display">
+                      {generateInitials(member.name)}
                     </span>
                   </div>
-                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-brand-500/80 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <p className="px-6 text-center text-sm text-white">
+                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-brand-600/90 via-brand-600/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    <p className="px-6 text-center text-sm text-white leading-relaxed line-clamp-6">
                       {member.bio}
                     </p>
                   </div>
                 </div>
-                <CardContent className="p-5 text-center">
-                  <h3 className="font-semibold text-surface-50">
+                <div className="p-5 space-y-2">
+                  <h3 className="text-lg font-semibold text-surface-900">
                     {member.name}
                   </h3>
-                  <p className="mt-1 text-sm text-surface-400">{member.role}</p>
-                </CardContent>
+                  <p className="text-sm text-surface-500">{member.role}</p>
+                  {member.socials && (
+                    <div className="flex items-center justify-center gap-3 pt-2">
+                      {member.socials.twitter && (
+                        <a
+                          href={member.socials.twitter}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-surface-400 hover:text-brand-500 transition-colors"
+                          aria-label={`${member.name} on Twitter`}
+                        >
+                          <Twitter size={16} />
+                        </a>
+                      )}
+                      {member.socials.linkedin && (
+                        <a
+                          href={member.socials.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-surface-400 hover:text-brand-500 transition-colors"
+                          aria-label={`${member.name} on LinkedIn`}
+                        >
+                          <Linkedin size={16} />
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </div>
               </Card>
             </StaggerItem>
           ))}

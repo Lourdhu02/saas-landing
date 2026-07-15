@@ -2,7 +2,8 @@
 
 import { Check, X } from "lucide-react";
 import { Header, Footer } from "@/components/layout";
-import { PricingTable, FAQ, CTASection, FadeIn } from "@/components/sections";
+import { PricingTable, FAQ, CTASection } from "@/components/sections";
+import { FadeIn } from "@/components/motion";
 
 const comparisonFeatures = [
   { name: "API calls/month", starter: "10K", growth: "100K", enterprise: "Unlimited" },
