@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: oklch(0.97 0.01 265);
+  --color-brand-100: oklch(0.93 0.03 265);
+  --color-brand-200: oklch(0.86 0.06 265);
+  --color-brand-300: oklch(0.78 0.10 265);
+  --color-brand-400: oklch(0.70 0.14 265);
+  --color-brand-500: oklch(0.62 0.18 265);
+  --color-brand-600: oklch(0.54 0.16 265);
+  --color-brand-700: oklch(0.44 0.13 265);
+  --color-brand-800: oklch(0.35 0.10 265);
+  --color-brand-900: oklch(0.26 0.07 265);
+  --color-brand-950: oklch(0.18 0.04 265);
+  --color-surface-50: oklch(0.985 0 0);
+  --color-surface-100: oklch(0.97 0.005 265);
+  --color-surface-200: oklch(0.94 0.008 265);
+  --color-surface-300: oklch(0.87 0.01 265);
+  --color-surface-400: oklch(0.75 0.02 265);
+  --color-surface-500: oklch(0.60 0.02 265);
+  --color-surface-600: oklch(0.48 0.02 265);
+  --color-surface-700: oklch(0.38 0.02 265);
+  --color-surface-800: oklch(0.28 0.02 265);
+  --color-surface-900: oklch(0.20 0.02 265);
+  --color-surface-950: oklch(0.12 0.02 265);
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --animate-fade-in: fade-in 0.5s ease-out;
+  --animate-slide-up: slide-up 0.5s ease-out;
+  --animate-scale-in: scale-in 0.3s ease-out;
+  --animate-marquee-left: marquee-left 30s linear infinite;
+  --animate-marquee-right: marquee-right 30s linear infinite;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+@keyframes marquee-right {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-surface-950 text-surface-50 antialiased;
+    font-family: var(--font-sans);
+  }
+  ::selection { @apply bg-brand-500/30; }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .gradient-text {
+    @apply bg-gradient-to-r from-brand-300 via-brand-400 to-brand-600 bg-clip-text text-transparent;
+  }
+  .glass {
+    @apply bg-surface-800/50 backdrop-blur-xl border border-surface-700/50;
+  }
+}
