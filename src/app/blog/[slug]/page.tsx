@@ -1,10 +1,11 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, Clock, User, Tag } from "lucide-react";
-import { Badge, Button } from "@/components/ui";
+import { Badge } from "@/components/ui";
 import { formatDate } from "@/lib/utils";
 import { blogPosts } from "@/data/site";
-import type { BlogPost } from "@/types";
+
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -68,7 +69,16 @@ export default async function BlogPostPage({ params }: PageProps) {
               </div>
             </div>
 
-            <div className="aspect-video rounded-2xl bg-gradient-to-br from-brand-100 to-brand-200 mb-12" />
+            <div className="aspect-video rounded-2xl overflow-hidden mb-12 relative">
+              <Image
+                src={post.image}
+                alt={post.title}
+                fill
+                className="object-cover"
+                priority
+                sizes="(max-width: 768px) 100vw, 720px"
+              />
+            </div>
 
             <div className="max-w-none space-y-6 text-surface-600">
               <p>
@@ -119,7 +129,15 @@ export default async function BlogPostPage({ params }: PageProps) {
                     href={`/blog/${rp.slug}`}
                     className="group"
                   >
-                    <div className="aspect-video rounded-xl bg-gradient-to-br from-brand-100 to-brand-200 mb-4" />
+                    <div className="aspect-video rounded-xl overflow-hidden mb-4 relative">
+                      <Image
+                        src={rp.image}
+                        alt={rp.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                      />
+                    </div>
                     <Badge variant="default" className="mb-2">
                       {rp.category}
                     </Badge>

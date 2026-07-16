@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Clock, User } from "lucide-react";
 import { Badge, Card } from "@/components/ui";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/motion";
-import { formatDate, truncateText, generateInitials } from "@/lib/utils";
+import { formatDate, truncateText } from "@/lib/utils";
 import { blogPosts } from "@/data/site";
 import type { BlogPost } from "@/types";
 
@@ -34,7 +35,14 @@ export function BlogGrid({ posts = blogPosts }: BlogGridProps) {
             <Link href={`/blog/${featured.slug}`} className="group block">
               <Card className="overflow-hidden" padding="none">
                 <div className="grid md:grid-cols-2">
-                  <div className="aspect-video md:aspect-auto bg-gradient-to-br from-brand-200 to-brand-400 relative">
+                  <div className="aspect-video md:aspect-auto relative overflow-hidden">
+                    <Image
+                      src={featured.image}
+                      alt={featured.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
                     <div className="absolute top-4 left-4">
                       <Badge variant="default">{featured.category}</Badge>
                     </div>
@@ -72,7 +80,14 @@ export function BlogGrid({ posts = blogPosts }: BlogGridProps) {
             <StaggerItem key={post.slug}>
               <Link href={`/blog/${post.slug}`} className="group block h-full">
                 <Card className="h-full overflow-hidden" padding="none">
-                  <div className="aspect-video bg-gradient-to-br from-surface-200 to-surface-300 relative">
+                  <div className="aspect-video relative overflow-hidden">
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
                     <div className="absolute top-4 left-4">
                       <Badge variant={post.featured ? "default" : "outline"}>{post.category}</Badge>
                     </div>
