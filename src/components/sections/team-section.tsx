@@ -1,11 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import { Twitter, Linkedin } from "lucide-react";
 import { Card } from "@/components/ui";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/motion";
 import { teamMembers } from "@/data/site";
 import type { TeamMember } from "@/types";
-import { generateInitials } from "@/lib/utils";
 
 export function TeamSection() {
   return (
@@ -25,10 +25,14 @@ export function TeamSection() {
             <StaggerItem key={member.id}>
               <Card className="group h-full overflow-hidden text-center" padding="none">
                 <div className="relative">
-                  <div className="flex aspect-square items-center justify-center bg-gradient-to-br from-brand-100 to-brand-200">
-                    <span className="text-5xl font-bold text-brand-500/60 font-display">
-                      {generateInitials(member.name)}
-                    </span>
+                  <div className="aspect-square relative overflow-hidden">
+                    <Image
+                      src={member.avatar}
+                      alt={member.name}
+                      fill
+                      className="object-cover object-center"
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                    />
                   </div>
                   <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-brand-600/90 via-brand-600/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     <p className="px-6 text-center text-sm text-white leading-relaxed line-clamp-6">
