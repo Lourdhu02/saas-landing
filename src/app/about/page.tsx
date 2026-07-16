@@ -1,10 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import { Header, Footer } from "@/components/layout";
 import {
   TeamSection,
   CTASection,
-  HeroStats,
 } from "@/components/sections";
 import { FadeIn, CountUp } from "@/components/motion";
 
@@ -58,10 +58,14 @@ export default function AboutPage() {
                 </div>
               </FadeIn>
               <FadeIn direction="right">
-                <div className="aspect-video rounded-2xl bg-gradient-to-br from-brand-500/20 to-brand-700/20 flex items-center justify-center">
-                  <span className="text-8xl font-bold text-brand-400/30">
-                    AI
-                  </span>
+                <div className="aspect-video rounded-2xl overflow-hidden relative">
+                  <Image
+                    src="/about.jpg"
+                    alt="Aethra team collaborating"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
                 </div>
               </FadeIn>
             </div>
