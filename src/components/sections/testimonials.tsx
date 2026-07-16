@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Star } from "lucide-react";
 import { FadeIn, Marquee } from "@/components/motion";
 import { Card } from "@/components/ui";
@@ -32,8 +33,14 @@ export function Testimonials() {
                 &ldquo;{t.content}&rdquo;
               </p>
               <div className="flex items-center gap-3 pt-2 border-t border-surface-100">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-brand-400 to-brand-600 text-sm font-semibold text-white">
-                  {t.name.split(" ").map((n) => n[0]).join("")}
+                <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full">
+                  <Image
+                    src={t.avatar}
+                    alt={t.name}
+                    fill
+                    className="object-cover"
+                    sizes="40px"
+                  />
                 </div>
                 <div>
                   <p className="text-sm font-medium text-surface-900">
@@ -62,8 +69,14 @@ export function Testimonials() {
                 &ldquo;{t.content}&rdquo;
               </p>
               <div className="flex items-center gap-3 pt-2 border-t border-surface-100">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-brand-400 to-brand-600 text-sm font-semibold text-white">
-                  {t.name.split(" ").map((n) => n[0]).join("")}
+                <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full">
+                  <Image
+                    src={t.avatar}
+                    alt={t.name}
+                    fill
+                    className="object-cover"
+                    sizes="40px"
+                  />
                 </div>
                 <div>
                   <p className="text-sm font-medium text-surface-900">
